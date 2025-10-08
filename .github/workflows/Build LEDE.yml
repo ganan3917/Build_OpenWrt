@@ -1,3 +1,4 @@
+
 name: Build LEDE
 
 on:
@@ -15,28 +16,29 @@ jobs:
       CONFIG_FILE: all.config
       FEEDS_FILE: feeds.conf.default
       WORK_DIR: /mnt/lede
-      FIRMWARE_PATH: /mnt/lede/bin/targets/**/*.{img,bin,tar.gz}
+      FIRMWARE_PATH: /mnt/lede/bin/targets/**/*
 
     steps:
       - name: 检查仓库
         uses: actions/checkout@v4
-        
+
       - name: 查看磁盘空间、添加权限
         run: |
-          sudo chmod 777 /mnt
-          echo "==== 磁盘使用 ===="
+          sudo mkdir -p ${{ env.WORK_DIR }}
+          sudo chmod 777 ${{ env.WORK_DIR }}
+          echo "==== 查看磁盘 ===="
           df -h
-          
+
       - name: 拉取LEDE源码
         run: |
           git clone https://github.com/${{ env.LEDE_REPO }}.git \
             ${{ env.WORK_DIR }} \
             -b ${{ env.LEDE_BRANCH }} --depth 1 --single-branch
-            
+
       - name: 设置时间
         run: |
           echo "TIMES=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
-          
+
       - name: 安装依赖
         run: |
           sudo apt update -y
@@ -51,9 +53,7 @@ jobs:
       - name: 复制feeds.conf.default
         run: |
           cp -f ./configs/${{ env.FEEDS_FILE }} ${{ env.WORK_DIR }}/${{ env.FEEDS_FILE }}
-          echo "===== 已复制的 feeds.conf.default 内容 ====="
-          cat ${{ env.WORK_DIR }}/feeds.conf.default
-          
+
       - name: 更新软件源
         run: |
           cd ${{ env.WORK_DIR }}
@@ -63,32 +63,13 @@ jobs:
       - name: 复制config
         run: |
           cp -f ./configs/${{ env.CONFIG_FILE }} ${{ env.WORK_DIR }}/.config
-          # echo "===== 已复制的 .config 内容（前50行）====="
-          # cat ${{ env.WORK_DIR }}/.config | head -30
-          # echo "===== LEDE 编译后完整目录结构 ====="
-          # tree -L 3 ${{ env.WORK_DIR }}
-          
-      - name: 应用补丁
-        run: |
-          cd ${{ env.WORK_DIR }}
-          SCRIPT_version="$GITHUB_WORKSPACE/scripts/modify_version.sh"
-          SCRIPT_times="$GITHUB_WORKSPACE/scripts/modify_time_format.sh"
-          SCRIPT_cpuinfo="$GITHUB_WORKSPACE/scripts/modify_cpu_info.sh"
-          chmod +x "$SCRIPT_version"
-          chmod +x "$SCRIPT_times"
-          chmod +x "$SCRIPT_cpuinfo"
-          echo "执行固件版本修改脚本..."
-          "$SCRIPT_version"
-          "$SCRIPT_SCRIPT_times"
-          "$SCRIPT_SCRIPT_cpuinfo"
+          make defconfig
 
-        
       - name: 下载dl链
         run: |
           cd ${{ env.WORK_DIR }}
-          make defconfig
           make download -j4
-          
+
       - name: 编译固件
         run: |
           cd ${{ env.WORK_DIR }}
@@ -98,7 +79,7 @@ jobs:
         run: |
           cd ${{ env.WORK_DIR }}
           find ${{ env.WORK_DIR }} -name "*.ipk" -type f -delete
-          
+
       - name: 上传固件
         uses: softprops/action-gh-release@v2
         with:
@@ -110,12 +91,12 @@ jobs:
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.LEDE_ALL }}
-          
+
       - name: 清理旧固件
         uses: dev-drprasad/delete-older-releases@v0.3.3
         with:
           keep_latest: 3
           delete_tags: true
-          delete_tag_pattern: LEDE_x86_64_
+          tag_prefix: LEDE_x86_64_
         env:
           GITHUB_TOKEN: ${{ secrets.LEDE_ALL }}
