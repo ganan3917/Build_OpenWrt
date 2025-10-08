@@ -20,12 +20,7 @@ index 6d78f90..e5a3b2c 100644
  		var now = new Date();
  		var elem = document.getElementById('localtime');
 -		elem.innerText = now.toLocaleString();
-+		elem.innerText = now.getFullYear() + '/' + 
-+			(now.getMonth() + 1).toString().padStart(2, '0') + '/' + 
-+			now.getDate().toString().padStart(2, '0') + ' ' + 
-+			now.getHours().toString().padStart(2, '0') + ':' + 
-+			now.getMinutes().toString().padStart(2, '0') + ':' + 
-+			now.getSeconds().toString().padStart(2, '0');
++		elem.innerText = now.getFullYear() + '/' + (now.getMonth() + 1).toString().padStart(2, '0') + '/' + now.getDate().toString().padStart(2, '0') + ' ' + now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ':' + now.getSeconds().toString().padStart(2, '0');
  	}
  
  	function updateUptime() {
