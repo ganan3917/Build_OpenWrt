@@ -17,6 +17,7 @@ jobs:
       FEEDS_FILE: feeds.conf.default
       WORK_DIR: /mnt/lede
       FIRMWARE_PATH: /mnt/lede/bin/targets/**/*
+      TZ: Asia/Shanghai
 
     steps:
       - name: 检查仓库
