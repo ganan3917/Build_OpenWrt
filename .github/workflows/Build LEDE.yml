@@ -50,7 +50,7 @@ jobs:
 
       - name: 复制feeds.conf.default
         run: |
-          cp -f /configs/${{ env.FEEDS_FILE }} ${{ env.WORK_DIR }}/${{ env.FEEDS_FILE }}
+          cp -f ./configs/${{ env.FEEDS_FILE }} ${{ env.WORK_DIR }}/${{ env.FEEDS_FILE }}
           echo "===== 已复制的 feeds.conf.default 内容 ====="
           cat ${{ env.WORK_DIR }}/feeds.conf.default
           
@@ -62,7 +62,7 @@ jobs:
           
       - name: 复制config
         run: |
-          cp -f /configs/${{ env.CONFIG_FILE }} ${{ env.WORK_DIR }}/.config
+          cp -f ./configs/${{ env.CONFIG_FILE }} ${{ env.WORK_DIR }}/.config
           # echo "===== 已复制的 .config 内容（前50行）====="
           # cat ${{ env.WORK_DIR }}/.config | head -30
           # echo "===== LEDE 编译后完整目录结构 ====="
