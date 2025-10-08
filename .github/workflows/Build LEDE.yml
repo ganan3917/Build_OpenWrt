@@ -63,11 +63,11 @@ jobs:
       - name: 复制config
         run: |
           cp -f ./configs/${{ env.CONFIG_FILE }} ${{ env.WORK_DIR }}/.config
-          make defconfig
 
       - name: 下载dl链
         run: |
           cd ${{ env.WORK_DIR }}
+          make defconfig
           make download -j4
 
       - name: 编译固件
@@ -75,10 +75,19 @@ jobs:
           cd ${{ env.WORK_DIR }}
           make -j$(nproc)
           
-      - name: 清理ipk
+      - name: 整理固件
         run: |
           cd ${{ env.WORK_DIR }}
-          find ${{ env.WORK_DIR }} -name "*.ipk" -type f -delete
+          find "${{ env.FIRMWARE_DIR }}" -type f \
+            ! -name "*.bin" \
+            ! -name "*.tar.gz" \
+            ! -name "*.img" \
+            ! -name "*.img.gz" \
+            ! -name "*.VMDK" \
+            ! -name "*.VHD" \
+            ! -name "*.VDI" \
+            ! -name "*.QCOW2" \
+            -delete
 
       - name: 上传固件
         uses: softprops/action-gh-release@v2
