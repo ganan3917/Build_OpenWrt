@@ -5,21 +5,24 @@ index 45a59f1..f3b1c8d 100644
 @@ -1,7 +1,7 @@
  DISTRIB_ID='LEDE'
  DISTRIB_RELEASE='%C'
--DISTRIB_REVISION='%R'
--DISTRIB_DESCRIPTION='LEDE %C %R'
-+DISTRIB_REVISION='R$(date +%Y.%m.%d) by ganan3917'
-+DISTRIB_DESCRIPTION='LEDE R$(date +%Y.%m.%d) by ganan3917'
+-DISTRIB_REVISION='R25.8.8'
+-DISTRIB_DESCRIPTION='LEDE R25.8.8'
++DISTRIB_REVISION='R$(date +%Y.%m.%d)'
++DISTRIB_DESCRIPTION='LEDE R$(date +%Y.%m.%d)'
 
-diff --git a/package/lean/autocore/files/generic/index.htm b/package/lean/autocore/files/generic/index.htm
-index 82b39a6..d3a1f5c 100644
---- a/package/lean/autocore/files/generic/index.htm
-+++ b/package/lean/autocore/files/generic/index.htm
-@@ -10,7 +10,7 @@
- 	<tr><td width="33%"><%:Firmware Version%></td><td><%=luci.sys.exec("cat /etc/openwrt_release | grep DISTRIB_DESCRIPTION | awk -F \'\"\' \'{print $2}\'")%></td></tr>
- 	<tr><td><%:Kernel Version%></td><td><%=luci.sys.exec("uname -r")%></td></tr>
- 	<tr><td><%:Local Time%></td><td id="localtime"><%=os.date()%></td></tr>
--	<tr><td><%:LuCI Version%></td><td><%=luci.version%></td></tr>
-+	<tr><td><%:LuCI Version%></td><td>Custom Build</td></tr>
- </table>
- </script>
- </body>
+diff --git a/package/base-files/files/bin/config_generate b/package/base-files/files/bin/config_generate
+index 7f1d231..c2d3e4f 100755
+--- a/package/base-files/files/bin/config_generate
++++ b/package/base-files/files/bin/config_generate
+@@ -443,8 +443,8 @@ uci_set system.@system[0].hostname='OpenWrt'
+ # Generate /etc/os-release
+ (
+ 	echo "NAME='LEDE'"
+-	echo "VERSION='R25.8.8'"
+-	echo "ID='lede'"
++	echo "VERSION='R$(date +%Y.%m.%d)'"  # 替换os-release中的版本
+ 	echo "ID_LIKE='lede openwrt'"
+ 	echo "PRETTY_NAME='LEDE R$(date +%Y.%m.%d)'"  # 替换美化名称
+ 	echo "VERSION_ID='%C'"
+ 	echo "HOME_URL='https://lede-project.org/'"
+ 	echo "BUG_REPORT_URL='https://bugs.lede-project.org/'"

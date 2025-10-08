@@ -7,11 +7,8 @@ index 7f1d231..a791b2c 100755
  echo "$DISTRIB_DESCRIPTION" > "$ROOT_DIR/etc/version"
  
 -uci_set system.@system[0].model="$(grep -m1 '^model' /proc/cpuinfo | cut -d: -f2 | sed -e 's/^[ \t]*//')"
-+# 获取CPU型号（移除多余空格）
 +cpu_model=$(grep -m1 '^model name' /proc/cpuinfo | cut -d: -f2 | sed -e 's/^[ \t]*//')
-+# 获取CPU核心数
 +cpu_cores=$(grep -c '^processor' /proc/cpuinfo)
-+# 获取CPU主频（取第一个核心）
 +cpu_freq=$(grep -m1 '^cpu MHz' /proc/cpuinfo | cut -d: -f2 | sed -e 's/^[ \t]*//' | awk '{printf "%.2fGHz", $1/1000}')
 +uci_set system.@system[0].model="${cpu_model} (${cpu_freq}, ${cpu_cores} Cores)"
  
