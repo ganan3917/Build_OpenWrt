@@ -17,6 +17,7 @@ jobs:
       FEEDS_FILE: feeds.conf.default
       WORK_DIR: /mnt/lede
       FIRMWARE_PATH: /mnt/lede/bin/targets/**/*
+      DELETE_PATH: /mnt/lede/bin/targets/
       TZ: Asia/Shanghai
 
     steps:
@@ -80,7 +81,7 @@ jobs:
       - name: 整理固件
         run: |
           cd ${{ env.WORK_DIR }}
-          find "${{ env.FIRMWARE_DIR }}" -type f \
+          find ${{ env.DELETE_PATH }} -type f \
             ! -name "*.bin" \
             ! -name "*.tar.gz" \
             ! -name "*.img" \
