@@ -50,9 +50,9 @@ jobs:
 
       - name: 复制feeds.conf.default
         run: |
-          cp -f $GITHUB_WORKSPACE/configs/${{ env.FEEDS_FILE }} ${{ env.WORK_DIR }}/${{ env.FEEDS_FILE }}
-          # echo "===== 已复制的 feeds.conf.default 内容 ====="
-          # cat ${{ env.WORK_DIR }}/feeds.conf.default
+          cp -f /configs/${{ env.FEEDS_FILE }} ${{ env.WORK_DIR }}/${{ env.FEEDS_FILE }}
+          echo "===== 已复制的 feeds.conf.default 内容 ====="
+          cat ${{ env.WORK_DIR }}/feeds.conf.default
           
       - name: 更新软件源
         run: |
@@ -62,7 +62,7 @@ jobs:
           
       - name: 复制config
         run: |
-          cp -f $GITHUB_WORKSPACE/configs/${{ env.CONFIG_FILE }} ${{ env.WORK_DIR }}/.config
+          cp -f /configs/${{ env.CONFIG_FILE }} ${{ env.WORK_DIR }}/.config
           # echo "===== 已复制的 .config 内容（前50行）====="
           # cat ${{ env.WORK_DIR }}/.config | head -30
           # echo "===== LEDE 编译后完整目录结构 ====="
@@ -71,12 +71,17 @@ jobs:
       - name: 应用补丁
         run: |
           cd ${{ env.WORK_DIR }}
-          # 修改CPU显示格式
-          git apply --ignore-whitespace $GITHUB_WORKSPACE/patches/modify_system_info.patch
-          # 修改版本格式
-          # git apply --ignore-whitespace $GITHUB_WORKSPACE/patches/modify_version_info.patch
-          # 修改日期格式
-          git apply --ignore-whitespace $GITHUB_WORKSPACE/patches/modify_time_format.patch
+          SCRIPT_version="$GITHUB_WORKSPACE/scripts/modify_version.sh"
+          SCRIPT_times="$GITHUB_WORKSPACE/scripts/modify_time_format.sh"
+          SCRIPT_cpuinfo="$GITHUB_WORKSPACE/scripts/modify_cpu_info.sh"
+          chmod +x "$SCRIPT_version"
+          chmod +x "$SCRIPT_times"
+          chmod +x "$SCRIPT_cpuinfo"
+          echo "执行固件版本修改脚本..."
+          "$SCRIPT_version"
+          "$SCRIPT_SCRIPT_times"
+          "$SCRIPT_SCRIPT_cpuinfo"
+
         
       - name: 下载dl链
         run: |
