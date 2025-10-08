@@ -1,4 +1,3 @@
-[![编译 LEDE](https://github.com/ganan3917/Build_OpenWrt/actions/workflows/%E7%BC%96%E8%AF%91%20LEDE.yml/badge.svg?branch=main&event=workflow_dispatch)](https://github.com/ganan3917/Build_OpenWrt/actions/workflows/%E7%BC%96%E8%AF%91%20LEDE.yml)
 
 
 # 每天凌晨3点自动编译, 使用[LEDE](https://github.com/coolsnowwolf/lede)源码编译x86_64固件。
