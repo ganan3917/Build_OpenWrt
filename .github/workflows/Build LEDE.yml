@@ -38,6 +38,7 @@ jobs:
 
       - name: 设置时间
         run: |
+          export TZ=Asia/Shanghai
           echo "TIMES=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
 
       - name: 安装依赖
