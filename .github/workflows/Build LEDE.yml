@@ -72,11 +72,11 @@ jobs:
         run: |
           cd ${{ env.WORK_DIR }}
           # 修改CPU显示格式
-          git apply --ignore-whitespace /patches/modify_system_info.patch
+          git apply --ignore-whitespace ./patches/modify_system_info.patch
           # 修改版本格式
-          git apply --ignore-whitespace /patches/modify_version_info.patch
+          git apply --ignore-whitespace ./patches/modify_version_info.patch
           # 修改日期格式
-          git apply --ignore-whitespace /patches/modify_time_format.patch
+          git apply --ignore-whitespace ./patches/modify_time_format.patch
         
       - name: 下载dl链
         run: |
