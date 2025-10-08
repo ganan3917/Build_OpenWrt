@@ -71,6 +71,8 @@ jobs:
       - name: 应用补丁
         run: |
           cd ${{ env.WORK_DIR }}
+          # 显示当前仓库路径（调试用）
+          echo "当前仓库目录：$GITHUB_WORKSPACE"
           # 修改CPU显示格式
           git apply --ignore-whitespace ./patches/modify_system_info.patch
           # 修改版本格式
