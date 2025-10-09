@@ -20,4 +20,4 @@ cpu_cores=$(cat /proc/cpuinfo | grep -c '^processor')
 # 组合成目标主机型号字符串（例如："Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz 1600MHz 4核"）
 new_model="${cpu_model} ${cpu_freq} ${cpu_cores}核"
 # 替换原型号为 CPU 信息（注意保留其他字段）
-sed -i "s/^DISTRIB_MODEL=.*/DISTRIB_MODEL=\"${new_model}\"/g" /etc/openwrt_release
+sed -i "s/\"model\": {\"name\": \".*\"}/\"model\": {\"name\": \"${new_model}\"}/g" /etc/board.json
