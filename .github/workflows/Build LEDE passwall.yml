@@ -1,5 +1,5 @@
 
-name: Build LEDE
+name: Build LEDE passwall
 
 on:
   workflow_dispatch:
@@ -9,12 +9,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
-    name: Build LEDE
+    name: Build
     env:
       LEDE_REPO: coolsnowwolf/lede
       LEDE_BRANCH: master
       CONFIG_FILE: all.config
-      FEEDS_FILE: feeds.conf.default
+      FEEDS_FILE: passwall_feeds.conf.default
       WORK_DIR: /mnt/lede
       FIRMWARE_PATH: /mnt/lede/bin/targets/**/*
       DELETE_PATH: /mnt/lede/bin/targets/
@@ -51,16 +51,9 @@ jobs:
             python3 python3-pyelftools python3-setuptools qemu-utils rsync scons squashfs-tools subversion \
             swig texinfo uglifyjs upx-ucl unzip wget xmlto xxd zlib1g-dev tree
 
-      - name: 执行脚本
-        run: |
-          cd ${{ env.WORK_DIR }}
-          echo "$GITHUB_WORKSPACE"
-          chmod +x $GITHUB_WORKSPACE/scripts/custom_script.sh
-          $GITHUB_WORKSPACE/scripts/custom_script.sh
-          
       - name: 复制feeds.conf.default
         run: |
-          cp -f ./configs/${{ env.FEEDS_FILE }} ${{ env.WORK_DIR }}/${{ env.FEEDS_FILE }}
+          cp -f ./configs/${{ env.FEEDS_FILE }} ${{ env.WORK_DIR }}/feeds.conf.default
 
       - name: 更新软件源
         run: |
@@ -100,10 +93,10 @@ jobs:
       - name: 上传固件
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: LEDE_x86_64_${{ env.TIMES }}
-          name: LEDE x86_64_Release_${{ env.TIMES }}
+          tag_name: LEDE_x86_64_passwall_${{ env.TIMES }}
+          name: LEDE x86_64_passwall_${{ env.TIMES }}
           body: |
-                LEDE x86_64_Release_${{ env.TIMES }}
+                LEDE x86_64_passwall_${{ env.TIMES }}
           files: ${{ env.FIRMWARE_PATH }}
           prerelease: false
         env:
