@@ -54,8 +54,8 @@ jobs:
       - name: 执行脚本
         run: |
           echo "$GITHUB_WORKSPACE"
-          chmod +x $GITHUB_WORKSPACE/scripts/custom_script.sh
-          $GITHUB_WORKSPACE/scripts/custom_script.sh
+          chmod +x $GITHUB_WORKSPACE/${{ env.WORK_DIR }}/scripts/custom_script.sh
+          $GITHUB_WORKSPACE/${{ env.WORK_DIR }}/scripts/custom_script.sh
           
       - name: 复制feeds.conf.default
         run: |
