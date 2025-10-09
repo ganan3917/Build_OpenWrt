@@ -114,6 +114,5 @@ jobs:
         with:
           keep_latest: 3
           delete_tags: true
-          tag_prefix: LEDE_x86_64_
         env:
           GITHUB_TOKEN: ${{ secrets.LEDE_ALL }}
