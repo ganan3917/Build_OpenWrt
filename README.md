@@ -11,8 +11,6 @@
    - [ShadowsocksR Plus+](https://github.com/fw876/helloworld.git)
    - [passwall](https://github.com/xiaorouji/openwrt-passwall)
    - [openclash](https://github.com/vernesong/OpenClash)
-   - diskman (磁盘管理)
-   - dockerman （docker容器）
 
 - 下载链接：[https://github.com/ganan3917/OpenWrt/releases](https://github.com/ganan3917/OpenWrt/releases)
 
