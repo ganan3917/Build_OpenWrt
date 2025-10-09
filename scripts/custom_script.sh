@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# 获取当前北京时间（格式：YYYYMMDD）
+# 获取当前北京时间
 CURRENT_DATE=$(TZ=Asia/Shanghai date +%Y%m%d)
-# 定义新版本号
 NEW_VERSION="LEDE R${CURRENT_DATE}"
 
 # 修改固件版本号为编译日期
@@ -11,15 +10,14 @@ sed -i "s/^DISTRIB_DESCRIPTION='.*'/DISTRIB_DESCRIPTION='${NEW_VERSION}'/" packa
 sed -i "s/^DISTRIB_REVISION='.*'/DISTRIB_REVISION='R${CURRENT_DATE}'/" package/base-files/files/etc/openwrt_release
 
 
+# 提取 CPU 型号（取第一行有效信息）
+cpu_model=$(cat /proc/cpuinfo | grep -m1 'model name' | cut -d: -f2 | sed -e 's/^[ \t]*//')
+# 提取 CPU 主频（单位 MHz，取第一核心的主频）
+cpu_freq=$(cat /proc/cpuinfo | grep -m1 'cpu MHz' | cut -d: -f2 | sed -e 's/^[ \t]*//' | awk '{printf "%.0fMHz", $1}')
 
-# 设置时区为Asia/Shanghai  
-sed -i "s/option timezone '.*/option timezone 'Asia\/Shanghai'/" /etc/config/system  
-# 禁用UTC时间  
-sed -i "s/option utc '.*/option utc '0'/" /etc/config/system  
-# 设置时间格式（若已有time_format行则替换，无则添加）  
-sed -i "s/option time_format '.*/option time_format '%Y-%m-%d %H:%M:%S'/" /etc/config/system  
-sed -i "/config system 'system'/a option time_format '%Y-%m-%d %H:%M:%S'" /etc/config/system  
-# 配置国内NTP服务器（替换默认服务器）  
-sed -i "s/list server '.*'//g" /etc/config/system  # 清空原有服务器  
-sed -i "/config timeserver 'ntp'/a list server 'ntp.aliyun.com'" /etc/config/system  
-sed -i "/config timeserver 'ntp'/a list server 'time1.cloud.tencent.com'" /etc/config/system  
+# 提取 CPU 核心数
+cpu_cores=$(cat /proc/cpuinfo | grep -c '^processor')
+# 组合成目标主机型号字符串（例如："Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz 1600MHz 4核"）
+new_model="${cpu_model} ${cpu_freq} ${cpu_cores}核"
+# 替换原型号为 CPU 信息（注意保留其他字段）
+sed -i "s/^DISTRIB_MODEL=.*/DISTRIB_MODEL=\"${new_model}\"/g" /etc/openwrt_release
