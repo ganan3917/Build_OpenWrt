@@ -52,8 +52,8 @@ jobs:
       - name: 修改固件版本
         run: |
           cd ${{ env.WORK_DIR }}/package/lean/default-settings/files
-          sed -i '/export DISTRIB_DESCRIPTION/d' zzz-default-settings
-          echo 'export DISTRIB_DESCRIPTION="LEDE R($(date +%Y%m%d%H%M))"' >> zzz-default-settings
+          sed -i '/export DISTRIB_REVISION/d' zzz-default-settings
+          echo 'export DISTRIB_REVISION="R($(date +%Y%m%d%H%M))"' >> zzz-default-settings
           tail -15 zzz-default-settings
           
       - name: 复制feeds.conf.default
