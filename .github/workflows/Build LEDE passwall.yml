@@ -13,7 +13,7 @@ jobs:
     env:
       LEDE_REPO: coolsnowwolf/lede
       LEDE_BRANCH: master
-      CONFIG_FILE: all.config
+      CONFIG_FILE: pass.config
       FEEDS_FILE: passwall_feeds.conf.default
       WORK_DIR: /mnt/lede
       FIRMWARE_PATH: /mnt/lede/bin/targets/**/*
