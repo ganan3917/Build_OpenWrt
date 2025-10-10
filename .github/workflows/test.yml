@@ -51,7 +51,7 @@ jobs:
         run: |
           echo "TIMES=$(TZ=Asia/Shanghai date +%Y%m%d%H%M)" >> $GITHUB_ENV
           
-      - name:修改固件版本
+      - name: 修改固件版本
         run: |
           cd lede-src/package/lean/default-settings/files
           sed -i '/export DISTRIB_DESCRIPTION/d' zzz-default-settings
