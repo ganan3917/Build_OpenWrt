@@ -10,7 +10,6 @@
    - aotureboot(定时重启)
    - vlmcsd(KMS服务器)
    - accesscontrol(上网时间控制)
-   --- [ShadowsocksR Plus+](https://github.com/fw876/helloworld.git)
    - [passwall](https://github.com/xiaorouji/openwrt-passwall)
    - [openclash](https://github.com/vernesong/OpenClash)
 
