@@ -1,7 +1,7 @@
 
 
 
-name: Build immwrt
+name: Build immwrt passwall
 
 on:
   workflow_dispatch:
@@ -98,10 +98,10 @@ jobs:
       - name: 上传固件
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ImmortalWrt_x86_64_${{ env.TIMES }}
-          name: ImmortalWrt x86_64_${{ env.TIMES }}
+          tag_name: ImmortalWrt_passwall_x86_64_${{ env.TIMES }}
+          name: ImmortalWrt_passwall_x86_64_${{ env.TIMES }}
           body: |
-                ImmortalWrt x86_64_${{ env.TIMES }}
+                ImmortalWrt_passwall_x86_64_${{ env.TIMES }}
           files: ${{ env.FIRMWARE_PATH }}
           prerelease: false
         env:
