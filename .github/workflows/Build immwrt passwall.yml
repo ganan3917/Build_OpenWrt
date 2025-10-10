@@ -93,6 +93,7 @@ jobs:
             ! -name "*.VDI" \
             ! -name "*.QCOW2" \
             ! -name "*.iso" \
+            ! -name "*.vdi"
             -delete
 
       - name: 上传固件
