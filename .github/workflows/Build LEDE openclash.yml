@@ -5,7 +5,7 @@ name: Build LEDE openclash
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 19 * * *'
+    - cron: '0 18 * * *'
 
 jobs:
   build:
