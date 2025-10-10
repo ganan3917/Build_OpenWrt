@@ -88,12 +88,14 @@ jobs:
             ! -name "*.tar.gz" \
             ! -name "*.img" \
             ! -name "*.img.gz" \
-            ! -name "*.VMDK" \
-            ! -name "*.VHD" \
-            ! -name "*.VDI" \
-            ! -name "*.QCOW2" \
+            ! -name "*.vmdk" \
+            ! -name "*.vhm" \
+            ! -name "*.vdi" \
+            ! -name "*.qcow2" \
             ! -name "*.iso" \
-            ! -name "*.vdi"
+            ! -name "*.qed" \
+            ! -name "*.qcw" \
+            ! -name "*.vhdx" \
             -delete
 
       - name: 上传固件
