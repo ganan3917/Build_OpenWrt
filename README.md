@@ -1,4 +1,4 @@
-[![Build immwrt passwall](https://github.com/ganan3917/Build_OpenWrt/actions/workflows/Build%20immwrt%20passwall.yml/badge.svg?event=workflow_dispatch)](https://github.com/ganan3917/Build_OpenWrt/actions/workflows/Build%20immwrt%20passwall.yml)
+[![Build immwrt passwall](https://github.com/ganan3917/Build_OpenWrt/actions/workflows/Build%20immwrt%20passwall.yml/badge.svg?event=workflow_dispatch)](https://github.com/ganan3917/Build_OpenWrt/actions/workflows/Build%20immwrt%20passwall.yml)　
 [![Build LEDE passwall](https://github.com/ganan3917/Build_OpenWrt/actions/workflows/Build%20LEDE%20passwall.yml/badge.svg?event=workflow_dispatch)](https://github.com/ganan3917/Build_OpenWrt/actions/workflows/Build%20LEDE%20passwall.yml)
 
 # 每天凌晨3点自动编译OpenWrt x86_64 固件。
