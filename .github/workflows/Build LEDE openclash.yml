@@ -110,7 +110,7 @@ jobs:
       - name: 清理旧固件
         uses: dev-drprasad/delete-older-releases@v0.3.3
         with:
-          keep_latest: 3
+          keep_latest: 6
           delete_tags: true
         env:
           GITHUB_TOKEN: ${{ secrets.LEDE_ALL }}
