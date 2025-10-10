@@ -2,7 +2,7 @@
 
 # 每天凌晨3点自动编译x86_64固件。
 - [LEDE](https://github.com/coolsnowwolf/lede)
-- [ImmortalWrt](ImmortalWrt/ImmortalWrt)
+- [ImmortalWrt](https://github.com/ImmortalWrt/ImmortalWrt)
 # 固件说明
 
 - 插件列表
