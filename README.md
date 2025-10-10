@@ -1,7 +1,8 @@
 
 
-# 每天凌晨3点自动编译, 使用[LEDE](https://github.com/coolsnowwolf/lede)源码编译x86_64固件。
-
+# 每天凌晨3点自动编译x86_64固件。
+- [LEDE](https://github.com/coolsnowwolf/lede)
+- 
 # 固件说明
 
 - 插件列表
