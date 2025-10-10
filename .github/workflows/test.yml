@@ -43,9 +43,7 @@ jobs:
 
       - name: 拉取LEDE源码
         run: |
-          git clone https://github.com/${{ env.LEDE_REPO }}.git \
-            ${{ env.WORK_DIR }} \
-            -b ${{ env.LEDE_BRANCH }} --depth 1 --single-branch
+          git clone https://github.com/${{ env.LEDE_REPO }}.git ${{ env.WORK_DIR }} -b ${{ env.LEDE_BRANCH }} --depth 1 --single-branch
 
       - name: 设置时间
         run: |
@@ -53,7 +51,7 @@ jobs:
           
       - name: 修改固件版本
         run: |
-          cd lede-src/package/lean/default-settings/files
+          cd ${{ env.WORK_DIR }}/package/lean/default-settings/files
           sed -i '/export DISTRIB_DESCRIPTION/d' zzz-default-settings
           echo 'export DISTRIB_DESCRIPTION="LEDE R($(TZ=Asia/Shanghai date +%Y%m%d))"' >> zzz-default-settings
           tail -15 zzz-default-settings
