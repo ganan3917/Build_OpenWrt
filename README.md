@@ -1,6 +1,6 @@
 
 
-# 每天凌晨3点自动编译x86_64固件。
+# 每天凌晨3点自动编译OpenWrt x86_64 固件。
 - [LEDE](https://github.com/coolsnowwolf/lede)
 - [ImmortalWrt](https://github.com/ImmortalWrt/ImmortalWrt)
 # 固件说明
